@@ -34,11 +34,12 @@ GTM_VERSIONS_SCOPE = "https://www.googleapis.com/auth/tagmanager.edit.containerv
 GA4_EDIT_SCOPE = "https://www.googleapis.com/auth/analytics.edit"
 GTM_DELETE_SCOPE = "https://www.googleapis.com/auth/tagmanager.delete.containers"
 GTM_PUBLISH_SCOPE = "https://www.googleapis.com/auth/tagmanager.publish"
+GTM_MANAGE_USERS_SCOPE = "https://www.googleapis.com/auth/tagmanager.manage.users"
 
 _SCOPES_BY_TIER: dict[Tier, tuple[str, ...]] = {
     Tier.READ: (GTM_READ_SCOPE, GA4_READ_SCOPE),
     Tier.WRITE: (GTM_EDIT_SCOPE, GTM_VERSIONS_SCOPE, GA4_EDIT_SCOPE),
-    Tier.DESTRUCTIVE: (GTM_DELETE_SCOPE, GTM_PUBLISH_SCOPE),
+    Tier.DESTRUCTIVE: (GTM_DELETE_SCOPE, GTM_PUBLISH_SCOPE, GTM_MANAGE_USERS_SCOPE),
 }
 
 

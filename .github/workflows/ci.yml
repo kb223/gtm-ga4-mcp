@@ -17,7 +17,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      # Protocol-level smoke test: a real MCP client lists tools over stdio.
+      # Protocol-level smoke tests: a real MCP client lists tools over stdio.
       # Runs with zero Google credentials — clients are built lazily on first tool call.
-      - name: MCP Inspector smoke test (tools/list)
-        run: npx --yes @modelcontextprotocol/inspector --cli uv run gtm-ga4-mcp --method tools/list
+      - name: MCP Inspector smoke test (default read tier registers 8 tools)
+        run: |
+          npx --yes @modelcontextprotocol/inspector --cli uv run gtm-ga4-mcp --method tools/list \
+            | python3 -c "import json,sys; tools=json.load(sys.stdin)['tools']; assert len(tools)==8, tools; assert all(t['annotations']['readOnlyHint'] for t in tools)"
+      - name: MCP Inspector smoke test (destructive tier registers all 16 tools)
+        run: |
+          npx --yes @modelcontextprotocol/inspector --cli env GTM_GA4_MCP_ALLOW_DESTRUCTIVE=1 uv run gtm-ga4-mcp --method tools/list \
+            | python3 -c "import json,sys; tools=json.load(sys.stdin)['tools']; assert len(tools)==16, tools; names=[t['name'] for t in tools]; assert names==sorted(names)"

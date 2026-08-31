@@ -5,6 +5,10 @@ from __future__ import annotations
 from mcp.server.mcpserver.exceptions import ToolError
 
 _HINTS = {
+    400: (
+        "Invalid request. Check the body against the API reference for this entity type — "
+        "a gtm_get / ga4 read of an existing entity shows the expected shape."
+    ),
     401: "Credentials are invalid or expired. Re-run: gcloud auth application-default login",
     403: (
         "Permission denied. Check that (a) the Tag Manager / Analytics APIs are enabled in "

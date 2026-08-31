@@ -28,11 +28,47 @@ def read_only(title: str) -> ToolAnnotations:
     )
 
 
+def write_tool(title: str) -> ToolAnnotations:
+    return ToolAnnotations(
+        title=title,
+        read_only_hint=False,
+        destructive_hint=False,
+        idempotent_hint=False,
+        open_world_hint=True,
+    )
+
+
+def destructive_tool(title: str) -> ToolAnnotations:
+    return ToolAnnotations(
+        title=title,
+        read_only_hint=False,
+        destructive_hint=True,
+        idempotent_hint=False,
+        open_world_hint=True,
+    )
+
+
 def all_specs() -> list[ToolSpec]:
     """Collect every tool spec, sorted by name for deterministic tools/list ordering."""
-    from .tools import ga4_admin, ga4_data, gtm
+    from .tools import (
+        ga4_admin,
+        ga4_data,
+        ga4_destructive,
+        ga4_write,
+        gtm,
+        gtm_destructive,
+        gtm_write,
+    )
 
-    specs = [*gtm.SPECS, *ga4_admin.SPECS, *ga4_data.SPECS]
+    specs = [
+        *gtm.SPECS,
+        *gtm_write.SPECS,
+        *gtm_destructive.SPECS,
+        *ga4_admin.SPECS,
+        *ga4_data.SPECS,
+        *ga4_write.SPECS,
+        *ga4_destructive.SPECS,
+    ]
     names = [spec.name for spec in specs]
     if len(names) != len(set(names)):
         raise ValueError(f"Duplicate tool names in registry: {names}")

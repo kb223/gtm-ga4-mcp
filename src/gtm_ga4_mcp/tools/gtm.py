@@ -22,11 +22,12 @@ from ..registry import ToolSpec, read_only
 GTM_API = ("tagmanager", "v2")
 
 # Fields worth keeping in list summaries; everything else is retrievable via gtm_get.
-_SUMMARY_KEYS = {"path", "name", "type", "publicId", "usageContext"}
+_SUMMARY_KEYS = {"path", "name", "type", "publicId", "usageContext", "emailAddress"}
 
 
 class GtmEntityType(str, Enum):
     ACCOUNTS = "accounts"
+    USER_PERMISSIONS = "user_permissions"
     CONTAINERS = "containers"
     DESTINATIONS = "destinations"
     ENVIRONMENTS = "environments"
@@ -57,6 +58,9 @@ _WORKSPACE = _CONTAINER + "/workspaces/{workspace_id}"
 
 _ENTITIES: dict[GtmEntityType, _Entity] = {
     GtmEntityType.ACCOUNTS: _Entity(("accounts",), "account", 0, "(no parent)"),
+    GtmEntityType.USER_PERMISSIONS: _Entity(
+        ("accounts", "user_permissions"), "userPermission", 2, _ACCOUNT
+    ),
     GtmEntityType.CONTAINERS: _Entity(("accounts", "containers"), "container", 2, _ACCOUNT),
     GtmEntityType.DESTINATIONS: _Entity(
         ("accounts", "containers", "destinations"), "destination", 4, _CONTAINER
@@ -108,6 +112,7 @@ _ENTITIES: dict[GtmEntityType, _Entity] = {
 # gtm_get dispatch: second-to-last path segment -> resource attribute chain.
 _GET_CHAINS: dict[str, tuple[str, ...]] = {
     "accounts": ("accounts",),
+    "user_permissions": ("accounts", "user_permissions"),
     "containers": ("accounts", "containers"),
     "destinations": ("accounts", "containers", "destinations"),
     "environments": ("accounts", "containers", "environments"),
