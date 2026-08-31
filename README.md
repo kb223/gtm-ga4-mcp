@@ -101,6 +101,20 @@ Or any MCP client via `.mcp.json` / Claude Desktop config:
 
 PyPI package coming with v1.0 (`uvx gtm-ga4-mcp`).
 
+### "This app is blocked" during login
+
+Google blocks Tag Manager / Analytics scopes on gcloud's shared default OAuth client, so the plain `gcloud auth application-default login` above may fail with *"This app tried to access sensitive info in your Google Account."* The fix — same as Google documents for their own analytics-mcp — is a two-minute OAuth client of your own:
+
+1. In a Google Cloud project with the three APIs enabled, open **APIs & Services → OAuth consent screen**: user type **External**, publishing status **Testing**, and add your own Google account as a test user.
+2. **APIs & Services → Credentials → Create Credentials → OAuth client ID → Desktop app**, then download the client JSON.
+3. Re-run the login with your client:
+
+```bash
+gcloud auth application-default login --client-id-file=path/to/client_secret.json --scopes=<same scopes as above>
+```
+
+Heads-up: while the consent screen is in Testing mode, Google expires the refresh token after ~7 days, so expect to re-run the login weekly (or publish the app and click through the unverified-app warning).
+
 ## Try it
 
 Ask your agent things like:
