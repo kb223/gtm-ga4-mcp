@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 — 2026-08-31
+
+- Fix: per-thread Google API client cache. googleapiclient's httplib2 transport is not thread-safe, so two concurrent tool calls sharing one client corrupted the TLS connection (`SSL: RECORD_LAYER_FAILURE`). Found running parallel GA4 reports during a real audit.
+
 ## 0.3.0 — 2026-08-31
 
 Destructive tier (enable with `--allow-destructive` or `GTM_GA4_MCP_ALLOW_DESTRUCTIVE=1`):

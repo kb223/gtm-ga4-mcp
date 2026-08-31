@@ -1,6 +1,6 @@
 [project]
 name = "gtm-ga4-mcp"
-version = "0.3.0"
+version = "0.3.1"
 description = "MCP server for Google Tag Manager + GA4 with tiered safety controls (read / write / destructive)"
 readme = "README.md"
 license = "MIT"
