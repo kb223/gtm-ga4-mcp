@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2 — 2026-08-31
+
+- Require `mcp>=2,<3` explicitly (the code uses the v2 `mcp.server.mcpserver` API; a pre-existing mcp 1.x pin would otherwise install a broken combination).
+
 ## 0.3.1 — 2026-08-31
 
 - Fix: per-thread Google API client cache. googleapiclient's httplib2 transport is not thread-safe, so two concurrent tool calls sharing one client corrupted the TLS connection (`SSL: RECORD_LAYER_FAILURE`). Found running parallel GA4 reports during a real audit.

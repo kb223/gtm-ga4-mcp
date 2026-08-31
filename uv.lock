@@ -481,7 +481,7 @@ wheels = [
 
 [[package]]
 name = "gtm-ga4-mcp"
-version = "0.3.1"
+version = "0.3.2"
 source = { editable = "." }
 dependencies = [
     { name = "google-api-python-client" },
@@ -499,7 +499,7 @@ dev = [
 requires-dist = [
     { name = "google-api-python-client", specifier = ">=2.140" },
     { name = "google-auth", specifier = ">=2.30" },
-    { name = "mcp", specifier = ">=1.12" },
+    { name = "mcp", specifier = ">=2,<3" },
 ]
 
 [package.metadata.requires-dev]

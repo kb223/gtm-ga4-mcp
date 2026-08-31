@@ -1,6 +1,6 @@
 [project]
 name = "gtm-ga4-mcp"
-version = "0.3.1"
+version = "0.3.2"
 description = "MCP server for Google Tag Manager + GA4 with tiered safety controls (read / write / destructive)"
 readme = "README.md"
 license = "MIT"
@@ -22,7 +22,7 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP",
 ]
 dependencies = [
-    "mcp>=1.12",
+    "mcp>=2,<3",
     "google-api-python-client>=2.140",
     "google-auth>=2.30",
 ]
