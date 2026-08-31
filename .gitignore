@@ -1,0 +1,21 @@
+# Internal planning docs (not part of the public distribution)
+POV-PLAN.md
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Credentials — never commit
+*.json.key
+client_secret*.json
+service-account*.json
+.env
+
+# OS
+.DS_Store
